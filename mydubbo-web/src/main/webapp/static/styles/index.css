@@ -1,0 +1,128 @@
+/* 瑙ｅ喅鍙屽瀭鐩存粴鍔ㄦ潯闂,濡傛湁寮傚父锛屽垯鍒犻櫎姝ゆ潯鍙﹀瑙ｅ喅鏂规  */
+.panel-body {
+	overflow: hidden;
+	border-top-width: 0px;
+}
+/*璁剧疆鑿滃崟鏈�皬鏄剧ず楂樺害锛屽強楂樺害涓嶈冻鏃舵樉绀烘粴鍔ㄦ潯,濡傛灉蹇呰锛屽湪姝よ缃渶灏忛珮搴in-height*/
+.accordin_limit {
+	overflow: auto;
+}
+/*濡傛灉鏁翠釜鑿滃崟鏄剧ず涓嶅叏锛屽垯鍦ㄦ澶勮缃畂verflow-y:auto;*/
+.accordin_ov {
+	
+}
+
+.navlist {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0 5px 0 5px;
+}
+
+.navlist li {
+	padding: 0px;
+}
+
+.navlist li a {
+	line-height: 20px;
+	height: 20px;
+}
+
+.navlist li div {
+	margin: 2px 0px;
+	padding-left: 0px;
+	padding-top: 0px;
+	border: 1px dashed #ffffff;
+}
+
+.navlist li div.hover {
+	border: 1px dashed #99BBE8;
+	background: #E0ECFF;
+	cursor: pointer;
+}
+
+.navlist li div.hover a {
+	color: #416AA3;
+}
+
+.navlist li div.selected {
+	border: 1px solid #99BBE8;
+	background: #E0ECFF;
+	cursor: default;
+}
+
+.navlist li div.selected a {
+	color: #416AA3;
+	font-weight: bold;
+}
+
+.navlist li a.l-btn-plain {
+	border: none;
+	padding: 1px 6px 1px 1px;
+}
+
+.navlist_ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	display: none;
+	margin-left: 15px;
+}
+
+#editInfo tr,#editPWD tr {
+	height: 60px;
+}
+
+#editInfo label,#editPWD label {
+	padding-left: 50px;
+}
+
+#nav .panel-title {
+	padding-left: 10px;
+}
+/*----- header -----*/
+.home_header {
+	width: 100%;
+	height: 66px;
+	line-height: 66px;
+	border-bottom: 4px solid #789dcf;
+	background: url(../images/home_top_bg.png) 0 0 repeat-x;
+}
+
+.home_header .logo {
+	background: url(../images/home_top_logo.png) 0 0 no-repeat;
+	width: 294px;
+	height: 66px;
+	line-height: 66px;
+	float: left;
+}
+
+.home_header .head_left_info {
+	float: right;
+	line-height: 66px;
+	margin-right: 80px;
+	font-family: "Georgia", Tahoma, Sans-Serif;
+	font-size: 12px;
+	font-family: 榛戜綋;
+}
+
+.home_header .head_left_info a {
+	margin-left: 12px;
+}
+/*----- 澶撮儴 閾炬帴 -----*/
+.link_red {
+	color: #f7824a;
+	text-decoration: underline; 
+	font-family: 榛戜綋;
+}
+/*----- 宸︿晶瀵艰埅瑕嗙洊linkbutton -----*/
+a.menu_icon_menu span span.icon-leaf {
+	background-position: 3px center;
+}
+
+a.menu_icon_menu span span.l-btn-icon-left {
+	padding-left: 12px;
+}
+
+a.menu_icon_menu span.l-btn-left {
+	padding: 0 0 0 5px;
+}

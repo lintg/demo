@@ -1,0 +1,71 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*----- 头部 链接 -----*/
+/* .link_red{ color:#f7824a; text-decoration:underline;} */
+
+/*----- 按钮 -----*/
+/* .btn{ display:inline-block; width:98px; height:30px; background:#fff; border:1px solid #61c8a8; color:#61c8a8; font-size:12px; line-height:30px; text-align:center;} */
+/* .btn:hover{ background:#61c8a8; color:#fff;} */
+
+/*----- 左中右 -----*/
+/* .text_left{ text-align:left;} */
+/* .text_right{ text-align:right;} */
+/* .text_center{ text-align:center;} */
+
+/*----- header -----*/
+/* .header{ width:100%; height:66px; border-bottom:4px solid #61c8a8; background:#fff;} */
+/* .header .logo{ background:url(../images/logo.png) 0 0 no-repeat; width:270px; height:36px; float:left; margin-top:15px; margin-left:44px;} */
+/* .header .head_left_info{ float:right; line-height:66px; margin-right:236px;} */
+/* .header .head_left_info a{ margin-left:12px;} */
+
+/*----- 输入框 -----*/
+/* .inp{ width:213px; height:31px; border:1px solid #d8d8d8; border-radius:3px; padding:0 35px 0 10px; font-size:12px; color:#cecece; line-height:31px;} */
+/* input{ border:1px solid #99BBE8 } */
+/*----- 左导航 -----*/
+/* .main{ position:relative; background:#fff;} */
+/* .main .left_nav{ position:absolute; top:-4px; left:0px; width:258px; border-left:1px solid #e6e6e6; border-top:4px solid #f7824a;} */
+/* .main .left_nav li a{ display:block; height:39px; line-height:39px; background:#f2f2f2; color:#404040; border-right:1px solid #e6e6e6; border-bottom:1px solid #e6e6e6; position:relative; padding-left:40px;} */
+/* .main .left_nav li a .triangle_right{ background:url(../images/icon_free.png) 0 0 no-repeat; width:5px; height:9px; display:inline-block; position:absolute; top:16px; left:25px;} */
+/* .main .left_nav li a .arrow_bom{ background:url(../images/icon_free.png) -36px 0 no-repeat; width:10px; height:6px; display:inline-block; position:absolute; top:18px; left:238px;} */
+/* .main .left_nav li a:hover{ color:#61c8a8;} */
+/* .main .left_nav li a:hover .triangle_right{ background:url(../images/icon_free.png) -14px 0 no-repeat; width:9px; height:5px; display:inline-block; position:absolute; top:18px; left:23px;} */
+/* .main .left_nav li a:hover .arrow_bom{ background:url(../images/icon_free.png) -27px 0 no-repeat; width:6px; height:10px; display:inline-block; position:absolute; top:16px; left:240px;} */
+/* .main .left_nav .activ a{color:#61c8a8;} */
+/* .main .left_nav .activ a .triangle_right{ background:url(../images/icon_free.png) -14px 0 no-repeat; width:9px; height:5px; display:inline-block; position:absolute; top:18px; left:23px;} */
+/* .main .left_nav .activ a .arrow_bom{ background:url(../images/icon_free.png) -27px 0 no-repeat; width:6px; height:10px; display:inline-block; position:absolute; top:16px; left:240px;} */
+
+/* .main .left_nav .nav_son li a{ display:block; height:36px; line-height:36px; border-top:3px solid #fff;color:#404040; background:#fff; border-right-color:#fff; position:relative; padding-left:40px;} */
+/* .main .left_nav .nav_son li a .triangle_right{ background:url(../images/icon_free.png) 0 0 no-repeat; width:5px; height:9px; display:inline-block; position:absolute; top:16px; left:25px;} */
+/* .main .left_nav .nav_son li a:hover{ color:#61c8a8; border-top-color:#61c8a8;} */
+/* .main .left_nav .nav_son li a:hover .triangle_right{ background:url(../images/icon_free.png) -7px 0 no-repeat; width:5px; height:9px; display:inline-block; position:absolute; top:16px; left:25px;} */
+/* .main .left_nav .nav_son .activson a{ color:#61c8a8; border-top-color:#61c8a8;} */
+/* .main .left_nav .nav_son .activson a .triangle_right{ background:url(../images/icon_free.png) -7px 0 no-repeat; width:5px; height:9px; display:inline-block; position:absolute; top:16px; left:25px;} */
+
+/* .main .left_nav .nav_son .nav_sun li a{ display:block; height:36px; border-top:none; line-height:36px;color:#404040; background:#fff; border-right-color:#fff; padding-left:56px;} */
+/* .main .left_nav .nav_son .nav_sun li a:hover{ color:#61c8a8;} */
+/* .main .left_nav .nav_son .nav_sun .activsun a{ color:#61c8a8;} */
+/*----- 右侧框架 -----*/
+/* .right_con{ margin-left:258px; min-height:560px;} */
+/* .right_wrip{ padding:3px 10px;} */
+
+/*----- 右侧头部切换按钮 -----*/
+/* .top_tab_btn{ display:inline-block; width:168px; height:36px; background:#e9e8e8; text-align:center; line-height:36px; color:#171717; position:relative;} */
+/* .top_tab_btn .btn_wrong{ display:inline-block; width:12px; height:12px; background:url(../images/icon_free.png) -65px 0 no-repeat; position:absolute; top:4px; left:152px;} */
+/* .top_tab_btn:hover{ background:#61c8a8; color:#fff;} */
+/* .top_tab_btn:hover .btn_wrong{ display:inline-block; width:12px; height:12px; background:url(../images/icon_free.png) -48px 0 no-repeat; position:absolute; top:4px; left:152px;} */
+/* .top_btn_activ{background:#61c8a8; color:#fff;} */
+/* .top_btn_activ .btn_wrong{ display:inline-block; width:12px; height:12px; background:url(../images/icon_free.png) -48px 0 no-repeat; position:absolute; top:4px; left:152px;} */
+
+/*----- 右侧按钮底部边框 -----*/
+/* .right_content{ border:1px solid #dad9d9;} */
+
+
+
+
+
+
+
+
+
+

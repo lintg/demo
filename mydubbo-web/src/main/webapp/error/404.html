@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>404-错误</title>
+<link href="/static/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/global.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/error/error.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="lfMainBox">
+		<div class="lf_hear_long">
+			<a class="lf_img_a pt20 pr5 ui-a-href" href="/base/index"> <img alt="" src="/static/images/lfLogo.png" class="ui-img-src"></a>
+		</div>
+	</div>
+	<!-- 内容 开始 -->
+	<div class="lf_fmain">
+		<div class="lf_fcont">
+			<div class="lf_gcnt clearfix">
+				<div class="lf_fleft lfLeft_pople">
+					<img src="/static/images/error/pople_bg.jpg" class="ui-img-src" alt="" />
+				</div>
+				<div class="lf_fright">
+					<img src="/static/images/error/false2.png" class="pt15 ui-img-src" alt="" />
+					<p class="lf_fp1">您要查找的资源有问题无法显示。</p>
+					<p class="lf_fp2">
+						1.您可以<a href="javascript:history.back();">返回上一个页面</a>
+					</p>
+					<p class="lf_fp2">
+						2.您可以<a href="/base/index" class="ui-a-href">回到首页</a>
+					</p>
+					<!--<p class="lf_fp2">3.您可以<a href="#">尝试刷新</a></p>-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 内容 结束 -->
+	<!-- 页脚 开始 -->
+	<div id="foot">
+		<p class="foot_copy">
+			服务热线：<span class="foot_tel">8001000</span><em>（周一至周五9:00-18:00）</em>
+		</p>
+		<p>
+			<span>CopyRight &copy; 2016 All Rights Reserved</span> 版权所有 XXXXX软件
+		</p>
+		<p>经营许可证编号:ICP备110000号-1；</p>
+	</div>
+	<!-- 页脚 结束 -->
+	<script type="text/javascript">
+		var url = window.location.pathname;
+		var app = url.split("/");
+		if (app.length > 0) {
+			var size = 0, link = "", href = "", src = "";
+			//样式
+			size = document.getElementsByTagName("link").length;
+			for ( var i = 0; i < size; i++) {
+				href = document.getElementsByTagName("link")[i].getAttribute("href");
+
+				document.getElementsByTagName("link")[i].setAttribute("href", "/" + app[1] + href);
+			}
+			//链接
+			size = document.getElementsByClassName("ui-a-href").length;
+			for ( var i = 0; i < size; i++) {
+				href = document.getElementsByClassName("ui-a-href")[i].getAttribute("href");
+
+				document.getElementsByClassName("ui-a-href")[i].setAttribute("href", "/" + app[1] + href);
+			}
+			//图片
+			size = document.getElementsByClassName("ui-img-src").length;
+			for ( var i = 0; i < size; i++) {
+				src = document.getElementsByClassName("ui-img-src")[i].getAttribute("src");
+
+				document.getElementsByClassName("ui-img-src")[i].setAttribute("src", "/" + app[1] + src);
+			}
+		}
+	</script>
+</body>
+</html>

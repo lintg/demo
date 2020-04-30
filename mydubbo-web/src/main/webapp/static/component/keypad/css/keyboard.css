@@ -1,0 +1,98 @@
+div.keyboard {
+	height: 154px;
+	width: 370px;
+	background: url(../images/keyboard_normal.png) no-repeat #fff;
+	overflow: hidden;
+}
+
+div.keyboard .caption {
+	padding: 9px 5px 0px 5px;
+	position: relative
+}
+
+div.keyboard .caption button.default {
+	background: no-repeat 0px -154px;
+	height: 18px;
+	width: 76px;
+	border: 0px;
+	cursor: pointer;
+}
+
+div.keyboard .caption button.ok_button {
+	background: no-repeat 0px -154px;
+	height: 18px;
+	width: 76px;
+	border: 0px;
+	top: 8px;
+	cursor: pointer;
+	background: url(../images/ok_button.png);
+}
+
+div.keyboard .caption button.close_button {
+	background-position: -95px -154px;
+	width: 76px;
+	height: 18px;
+	border: 0px;
+	position: absolute;
+	right: 7px;
+	top: 8px;
+	cursor: pointer;
+	background: url(../images/close_button.png);
+}
+
+div.keyboard .caption button.use_keyboard {
+	background-position: -95px -154px;
+	width: 76px;
+	height: 18px;
+	border: 0px;
+	position: absolute;
+	right: 7px;
+	top: 8px;
+	background: url(../images/close.png);
+}
+
+div.keyboard .display {
+	padding: 4px 0 0 5px;
+}
+
+div.keyboard .display ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+div.keyboard .display li {
+	float: left;
+	background: url(../images/keyboard2.png) no-repeat 0px -216px;
+	height: 22px;
+	line-height: 22px;
+	width: 22px;
+	font-size: 12px;
+	text-align: center;
+	cursor: pointer;
+	margin: 0 2px 2px 0;
+}
+/*div.keyboard .display li.num{ background-position:0 -238px;}*/
+div.keyboard .display li.chardelete {
+	width: 22px;
+	background-position: 0px -194px;
+	margin-right: 24px;
+}
+
+div.keyboard .display li.deleteaction {
+	width: 22px;
+	background-position: 0px -194px;
+	margin-right: 24px;
+	background: url(../images/delete_button.png);
+}
+
+div.keyboard .display li.charswitch {
+	width: 94px;
+	background-position: 0px -172px;
+}
+
+div.keyboard .display li.caseswitch {
+	width: 94px;
+	background-position: 0px -172px;
+	background: url(../images/swith_button.png);
+}
