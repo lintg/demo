@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- open=true（默认值为true），表示这个preload是有效，开启预加载模式。 -->
+<!-- usePreloadItems=true（默认值为true），表示用当前的item项去过滤预加载（也就是只预加载下面的的几个item）。为false时就不过滤，直接根据mybatis的useCatch配置进行加载. -->
+<!-- versionFlag（默认值为为当前日期，如：2013-11-27）表示预加载版本，如果不设置，在并行模式下：一天内多个实例只能成功加载一次。 如果需要加载多次就修改这个标志，保证不和上次重复即可，建议使用当前日期+时间 
+	形式的字符串。 -->
+<!-- parallel=true（默认值为false），表示开启并行模式，这样多个实例会抢占加载所有加载项（所有加载项只加载一次）如果为false，
+就只有第一个抢到加载key的实例才能执行预加载，其他的实例都将跳过预加载。这两种形式的key都是finishFlag去判断是否重新加载，
+finishFlag由versionFlag决定，如果没有取当天日期（如：2013-11-30）作为版本号， -->
+<preload open="false" usePreloadItems="true" parallel="true" versionFlag="2013-12-14 15:30">
+	<!-- cacheGroup 指定 item这个id的存放位置，用于判断这个item是否已经加载过。 -->
+	<cacheGroup>mclient0</cacheGroup>
+	<preloadItems>
+		<!-- 公共的缓存  -->
+		<!--
+		<item>com.coba.tofuture.base.dao.CodeInfoDao.getCodeInfo</item>	
+		<item>com.coba.tofuture.base.dao.CodeInfoDao.getCodeInfoList</item>	
+		<item>com.coba.tofuture.base.dao.CodeInfoDao.getCodeInfoListByTypeCode</item>	
+		<item>com.coba.tofuture.base.dao.CodeInfoDao.getCascadeCodeInfoList</item>	
+		<item>com.coba.tofuture.base.dao.AreaDao.getAreaByAreaCode</item>
+		<item>com.coba.tofuture.base.dao.AreaDao.getCityList</item>
+		<item>com.coba.tofuture.base.dao.AreaDao.getProvinceList</item>			
+		<item>com.coba.tofuture.base.dao.AreaDao.getCountyList</item>
+		<item>com.coba.tofuture.base.dao.AreaDao.getFullArea</item>	
+		<item>com.coba.tofuture.base.dao.ParamDao.getParam</item>		
+		<item>com.coba.tofuture.base.dao.CpErrorInfoCompDao.selectByPrimaryKey</item>
+		<item>com.coba.tofuture.base.dao.CpErrorInfoCompDao.selectByErrorName</item>		
+		<item>com.coba.tofuture.base.dao.CountryDao.getCountryList</item>	
+		<item>com.coba.tofuture.base.dao.CountryDao.selectByContryCode</item>	
+		<item>com.coba.tofuture.base.dao.TradeDao.selectByPrimaryKey</item>		
+		<item>com.coba.tofuture.base.dao.TradeDao.getFirstLevelTrades</item>		
+		<item>com.coba.tofuture.base.dao.TradeDao.getSecondLevelTrades</item>		
+		<item>com.coba.tofuture.base.dao.TradeDao.getThirdLevelTrades</item>		
+		<item>com.coba.tofuture.base.dao.TradeDao.getFourthLevelTrades</item>	
+		<item>com.coba.tofuture.base.dao.TradeDao.getAllPathTrades</item>		
+		<item>com.coba.tofuture.base.dao.MsgTemplateDao.getMsgTemplateInfo</item>	
+		<item>com.coba.tofuture.base.dao.SignFieldDao.getSignFieldList</item>			
+		<item>com.coba.tofuture.base.dao.SignFormDao.selectByPrimaryKey</item>	
+		<item>com.coba.tofuture.base.dao.GroupDao.getParentGroup</item>		
+		<item>com.coba.tofuture.base.dao.GroupDao.getChildrenGroups</item>	
+		<item>com.coba.tofuture.base.dao.GroupDao.getGroupsByResNo</item>	
+		<item>com.coba.tofuture.base.dao.GroupDao.getGroupsByPosCode</item>	
+		<item>com.coba.tofuture.base.dao.GroupDao.getDistinctPositionByPosCode</item>	
+		<item>com.coba.tofuture.base.dao.GroupDao.selectByPrimaryKey</item>		
+		<item>com.coba.tofuture.base.dao.GroupResourceDao.selectByGroupCode</item>
+		-->																																				
+	</preloadItems>
+</preload>

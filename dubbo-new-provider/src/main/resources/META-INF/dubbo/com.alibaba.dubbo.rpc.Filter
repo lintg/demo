@@ -1,0 +1,1 @@
+testAccessLog=com.mydubbo.common.filter.MeAccessLogFilter

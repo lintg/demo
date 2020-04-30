@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-lazy-init="true">
+	
+	<bean id="internalRouter" class="com.coba.core.daoframework.router.config.MeInteralRouterXmlFactoryBean">
+		<property name="functionsMap">
+			<map>
+				<entry key="mod">
+					<bean
+						class="com.coba.core.daoframework.router.rules.support.ModFunction"></bean>
+				</entry>
+			</map>
+		</property>
+		<property name="configLocations">
+			<list>
+				<value>classpath*:daos/**/*rules.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="partition1_main" />
+		<property name="transactionFactory" ref="transactionFactory" />
+		<!-- <property name="typeAliasesPackage" value="com.coba.tofuture.demo.domain;com.coba.tofuture.base.domain"/> -->
+		<!-- 显式指定Mapper文件位置 -->
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:daos/**/*Dao.xml</value>
+				<value>classpath*:daos/**/*Mapper.xml</value>
+			</list>
+		</property>
+		<property name="configLocation" value="classpath:config/sqlmapconfig.xml" />
+	</bean>
+	
+	<bean id="transactionFactory" class="com.coba.core.daoframework.support.execution.MeManagedTransactionFactory">
+		<property name="closeConnection" value="false" />
+	</bean>
+
+	<bean id="transactionManager" class="com.coba.core.daoframework.transaction.MultipleDataSourcesTransactionManager">
+		<property name="meDataSourceService" ref="dataSources" />
+		<property name="transactionSynchronization" value="2" />
+	</bean>
+
+	<bean id="sqlSessionTemplate" class="com.coba.core.daoframework.MeSqlSessionTemplate">
+		<constructor-arg type="org.apache.ibatis.session.SqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="meDataSourceService" ref="dataSources" />
+		<property name="defaultDataSourceName" value="partition1_main" />
+		<property name="router" ref="internalRouter" />
+		<property name="sqlAuditor">
+			<bean class="com.coba.core.daoframework.audit.SimpleSqlAuditor" />
+		</property>
+		<property name="profileLongTimeRunningSql" value="true" />
+		<property name="longTimeRunningSqlIntervalThreshold" value="100" />
+		<!-- 新增开启 sql监控属性 -->
+		<property name= "showSqlExecuteTime" value = "true" />
+	</bean>
+
+	<bean id="meSqlSessionDaoSupport" class="com.coba.core.daoframework.MeSqlSessionDaoSupport">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+
+	<!-- 启用事务注解方式 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+</beans>

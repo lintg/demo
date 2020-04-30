@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mydubbo.common.dao.SqlMonitorLogDao">
+	<insert id="insertRecord" parameterType="com.coba.core.monitor.sqllog.domain.SqlMonitorLog">
+		INSERT INTO
+		MONITOR_EXECUTE_SQL(ID,STATEMENT_NAME,BOUND_SQL,PARAMETERS,CLIENT_IP,ELAPSED,OVER_TIME)
+		VALUES(#{id},#{statementName},#{boundSql},#{parameters},#{clientIp},#{elapsed},#{overTime})
+	</insert>
+	<insert id="insertRecords" parameterType="java.util.List">
+		INSERT INTO
+		MONITOR_EXECUTE_SQL(ID,STATEMENT_NAME,BOUND_SQL,PARAMETERS,CLIENT_IP,ELAPSED,OVER_TIME)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{id},#{statementName},#{boundSql},#{parameters},#{clientIp},#{elapsed},#{overTime})
+		</foreach>
+	</insert>
+</mapper>

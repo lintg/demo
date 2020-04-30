@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-lazy-init="true">
+
+	<!-- 启用spring注解 -->
+	<context:annotation-config />
+
+	
+	<!-- 缓存配置   注意:redis.properties文件要放在根路径下  -->
+	<bean id="cacheAdminFactory" class="com.coba.core.cacheframework.cache.CacheAdminFactory">
+		<constructor-arg index="1" value="redis.properties" />
+	</bean>
+	<!-- 缓存客户端使用--> 
+	<bean id="cacheClient" factory-bean="cacheAdminFactory" factory-method="getCacheClient"/>
+	
+    <bean id="springContextUtil" class="com.coba.core.utils.SpringContextUtil"
+		lazy-init="false"></bean>
+	
+</beans>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- 控制台输出 -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>%date [%-5level] [%thread] %logger{80} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 时间滚动输出 level为 DEBUG 日志 -->
+    <appender name="file—stdout" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">   
+			<level>DEBUG</level>   
+		</filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>logs/debug.%d{yyyy-MM-dd_HH}.log</FileNamePattern>
+            <MaxHistory>5</MaxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%date [%-5level] [%thread] %logger{80} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 时间滚动输出 level为 ERROR 日志 -->
+    <appender name="file—error"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY </onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>logs/error.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%date [%-5level] [%thread] %logger{80} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Spring日志控制 -->
+    <logger name="org.springframework.web" level="DEBUG"/>
+    <logger name="org.springframework.beans" level="DEBUG"/>
+    <logger name="org.springframework.core" level="DEBUG"/>
+    <logger name="org.springframework.ui" level="DEBUG"/>
+    <logger name="org.springframework.jndi" level="DEBUG"/>
+    <logger name="org.springframework.context" level="DEBUG"/>
+    <logger name="o.springframework.web.servlet.mvc" level="WARN"/>
+    <logger name="runqianReportLogger" level="WARN"/>
+    
+    <logger name="com.mego" level="DEBUG"/>
+     <logger name="org.apache.velocity.app" level="DEBUG"/>
+     <logger name="org.apache.commons.digeste" level="DEBUG"/>
+     <logger name="com.alisoft.xplatform.asf" level="DEBUG"/>
+     
+    <!-- ehcache日志控制 -->
+    <logger name="net.sf.ehcache" level="WARN"/>
+    
+    <!-- shiro日志控制 -->
+    <logger name="org.apache.shiro" level="INFO"/>
+    
+      
+    <!-- 应用代码日志控制** -->
+    <!-- 
+    <logger name="com.mego.netbank.demo" level="DEBUG"/>
+	-->
+ 
+    <root level="INFO">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="file—stdout" />
+        <appender-ref ref="file—error" />
+    </root>
+
+</configuration>

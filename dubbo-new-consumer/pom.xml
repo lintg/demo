@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.6.RELEASE</version>
+        <relativePath/>
+  </parent>
+  <artifactId>dubbo-new-consumer</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>dubbo-new-consumer</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<dubbo.version>2.7.6</dubbo.version>
+        <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
+        <java.version>1.8</java.version>
+	    <coba.core.version>1.0.0</coba.core.version>
+		<c3p0.version>0.9.5-pre6</c3p0.version>
+		<mysql.connector.version>5.1.26</mysql.connector.version>
+		<logback-ext-spring>0.1.1</logback-ext-spring>
+  </properties>
+  <dependencies>
+  		<!-- 依赖模型和服务接口项目 start -->
+		<dependency>
+			<groupId>com.test</groupId>
+			<artifactId>mydubbo-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- core start -->
+		<dependency>
+			<groupId>com.coba</groupId>
+			<artifactId>coba-core</artifactId>
+			<version>${coba.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.coba</groupId>
+			<artifactId>coba-web</artifactId>
+			<version>${coba.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.coba</groupId>
+			<artifactId>coba-daoframework</artifactId>
+			<version>${coba.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.coba</groupId>
+			<artifactId>coba-cacheframework</artifactId>
+			<version>${coba.core.version}</version>
+		</dependency>
+		<!-- core依赖 end -->
+    	    <!-- Spring Boot dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>${dubbo.version}</version>
+        </dependency>
+
+        <!-- Zookeeper dependencies -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-dependencies-zookeeper</artifactId>
+            <version>${dubbo.version}</version>
+            <type>pom</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        <!-- database start -->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>${c3p0.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.connector.version}</version>
+		</dependency>
+		<!-- database end -->
+		<!-- sql monitor 依赖 start -->
+		<dependency>
+			<groupId>org.logback-extensions</groupId>
+			<artifactId>logback-ext-spring</artifactId>
+			<version>${logback-ext-spring}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- sql monitor 依赖 end -->
+  </dependencies>
+  
+  	<build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>false</executable>
+                    <finalName>${project.artifactId}-${spring-boot.version}</finalName>
+                    <outputDirectory>${user.dir}/target</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

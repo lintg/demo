@@ -1,0 +1,13 @@
+<rules>
+	<!-- 新增 -->
+	<rule>
+		<sqlmap>com.mydubbo.common.dao.MeAccessLogDao.insert</sqlmap>
+		<shardingExpression>(id%2L)==1</shardingExpression>
+		<shards>partition_log1</shards>
+	</rule>
+	<rule>
+		<sqlmap>com.mydubbo.common.dao.MeAccessLogDao.insert</sqlmap>
+		<shardingExpression>(id%2L)==0</shardingExpression>
+		<shards>partition_log2</shards>
+	</rule>
+</rules>

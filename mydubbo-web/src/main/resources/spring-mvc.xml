@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+<!-- 	<mvc:annotation-driven/> -->
+	
+	<!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="com.mydubbo.user.controller"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- spring mvc 添加json处理 
+		spring 版本4的写法，5会报错 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<util:list id="beanList">
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</util:list>
+		</property>
+	</bean>
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置multipart resolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+	<!-- 自定义HandlerMethodExceptionResolver -->
+	<bean id="handlerExceptionResolver"
+		class="com.coba.core.exceptionhandler.AnnotationHandlerMethodExceptionResolver">
+		<property name="defaultErrorView" value="/error/500" />
+		<property name="messageConverters" ref="mappingJacksonHttpMessageConverter" />
+		<property name="exceptionMappings">
+			<props> 
+				<prop key="com.coba.core.exception.BusinessException">/error/500</prop>
+				<prop key="com.coba.core.exception.TokenException">/error/500</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 定义JSP文件的位置 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+	<!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL -->
+	<mvc:default-servlet-handler />
+
+	<!-- 定义无需Controller的url<->view直接映射 ** -->
+	<mvc:view-controller path="/" view-name="redirect:/home" />
+
+	<!-- 将Controller抛出的异常转到特定View, 保持SiteMesh的装饰效果
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="com.coba.core.exception.BusinessException">error/500</prop>
+			</props>
+		</property>
+	</bean> -->
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
+
+</beans>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry
+		location="E:/j2ee/mysql-connector-java-5.1.5-bin.jar" />
+	<context id="context1">
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+			<property name="suppressDate" value="false" /> <!-- 是否生成注释代时间戳 -->
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.0.8:3306/tonext?useUnicode=true&amp;characterEncoding=utf8"
+			userId="tonext" password="tonext123">
+		</jdbcConnection>
+		<javaModelGenerator targetPackage="com.coba.tofuture.next.domain"
+			targetProject="tofuture-api">
+			<property name="exampleMethodVisibility" value="false" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="daos.next"
+			targetProject="tofuture-service/src/main/resources" />
+		<javaClientGenerator targetPackage="com.coba.tofuture.next.dao"
+			targetProject="tofuture-service" type="XMLMAPPER">
+			<property name="exampleMethodVisibility" value="false" />
+		</javaClientGenerator>
+		<table schema="" tableName="test" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+	</context>
+</generatorConfiguration>

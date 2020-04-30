@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <!-- WebLoigc不支持*,**等通配符 -->
+
+    <import resource="classpath:config/spring/spring-scan-bean.xml" />
+    <import resource="classpath:config/spring/spring-dubbo.xml" />
+    <import resource="classpath:config/spring/spring-datasource.xml" />
+    <import resource="classpath:config/spring/spring-mybatis.xml" />
+    <import resource="classpath:config/spring/spring-beans.xml" />
+
+</beans>  

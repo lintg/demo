@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>mydubbo</artifactId>
+        <groupId>com.test</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>mydubbo-web</artifactId>
+    <packaging>war</packaging>
+
+    <name>Getting Started with Spring on JBoss</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>4.3.26.RELEASE</spring.version>
+	</properties>
+ <!-- 依赖项定义 -->
+	<dependencies>
+		<!-- core start -->
+		<dependency>
+			<groupId>com.coba</groupId>
+			<artifactId>coba-core</artifactId>
+			<version>${coba.core.version}</version>
+			<!-- core框架 引用spring 5，这边tomcat启动会报错没解决，只能这边排除5版本，再引入4的版本 -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.coba</groupId>
+			<artifactId>coba-web</artifactId>
+			<version>${coba.core.version}</version>
+			<!-- core框架 引用spring 5，这边tomcat启动会报错没解决，只能这边排除5版本，再引入4的版本 -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-webmvc</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- core依赖 end -->
+
+		<!-- 依赖模型和服务接口项目 start  -->
+		<dependency>
+			<groupId>com.test</groupId>
+			<artifactId>mydubbo-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- WEB begin -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- SECURITY begin 
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>-->
+		<!-- SECURITY end -->
+
+		<!-- file upload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<!-- file upload end -->
+
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		
+ 		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-lgpl</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+		  <groupId>net.sf.json-lib</groupId>
+		  <artifactId>json-lib</artifactId>
+		  <version>2.4</version>
+		  <classifier>jdk15</classifier>
+		</dependency> 
+		
+		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+		    <groupId>org.freemarker</groupId>
+		    <artifactId>freemarker</artifactId>
+		    <version>2.3.19</version>
+		</dependency>
+		
+		<!--使用spring4时需要使用jackson2.X的 -->
+		<dependency>
+			    <groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-annotations</artifactId>
+			    <version>2.5.3</version>
+		</dependency>
+		<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.5.3</version>
+        </dependency>
+       <!--  dubbo 2.5.3升级到2.6.8要加的包   start-->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.1.32.Final</version>
+		</dependency>
+		<dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <!--  dubbo 2.5.3升级到2.6.8要加的包   end-->
+	</dependencies>
+
+	<build>
+		<finalName>mydubbo-web</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.version}</version>
+				<configuration>
+					<scanIntervalSeconds>
+						2
+					</scanIntervalSeconds>
+					<useFileMappedBuffer>false</useFileMappedBuffer>
+					<systemProperties>
+						<systemProperty>
+							<name>spring.profiles.active</name>
+							<value>development</value>
+						</systemProperty>
+					</systemProperties>
+					<useTestClasspath>true</useTestClasspath>
+
+					<webAppConfig>
+						<contextPath>/${project.artifactId}</contextPath>
+					</webAppConfig>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

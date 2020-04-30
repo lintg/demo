@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- 引用*.properties属性文件 -->
+	<!-- 
+	<bean id="porpertyLoder" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="porpertyLoder" />
+    </bean>    
+ 	-->
+	<!--
+	WebLoigc不支持*,**等通配符方式
+	<context:component-scan base-package="ishitong.project.service.**" />
+	-->
+	
+	<context:component-scan base-package="com.mydubbo">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- 扫描basePackage下所有以@MeDaoRepository标识的dao接口 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.mydubbo,com.coba.core.batch.dao" />
+		<property name="annotationClass" value="com.coba.core.daoframework.support.MeDaoRepository" />
+		<property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate" />
+	</bean>
+	
+</beans>

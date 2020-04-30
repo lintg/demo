@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-lazy-init="true">
+	
+	<!-- 根据实体注解验证实体对象 -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+	
+	
+	<bean id="filterInitializer" class="com.coba.core.monitor.accesslog.service.MeAccessLogFilterInitializer" lazy-init="false">
+		<!-- 队列大小,默认值 256 -->
+		<property name="capacity" value="256" />
+		<!-- 向队列中加数据的模式,默认值 DISCARD,可选值 BLOCK, DISCARD, DISCARD_AND_THROW, TIMEOUT -->
+		<!-- <property name="mode" value="DISCARD" /> -->
+		<!-- 操作阻塞队列的超时时间 ,只有 mode=BLOCK 时该值才生效 -->
+		<property name="timeOut" value="1001" />
+		<!-- 工作线程池大小,默认值 1 -->
+		<property name="threadNum" value="1" />
+		<!-- 平滑关闭线程池的超时时间 默认值 20000 -->
+		<property name="shutdown_timeOut" value="20000" />
+	</bean>
+	
+	<!-- logback 与 spring整合holder类,主要用于让 Appender 处于Spring容器内 -->
+	<bean class="ch.qos.logback.ext.spring.ApplicationContextHolder" />	
+	
+	<!-- SQL监控的 DB Appender -->
+	<bean name="sqlMonitorDB" class="com.coba.core.monitor.sqllog.appender.SqlMonitorDBAppender" init-method="start" destroy-method="stop">
+		<property name="context" value="#{ T(org.slf4j.LoggerFactory).getILoggerFactory() }" />
+		<property name="logService" ref="sqlExecuteLogService" />
+	</bean>
+			
+	<!-- SQL监控的 Async Appender,本身不处理记录功能,将请求分发给 sqlMoniotorDB -->
+	<bean name="sqlMonitor" class="com.coba.core.monitor.sqllog.appender.ThreadPoolAsyncAppender" init-method="start" destroy-method="stop">
+		<!-- 设置队列大小 , 默认值为 256 -->
+		<property name="queueSize" value="512" />
+		<!-- 处理队列的线程池大小,默认值为 2  -->
+		<property name="threadSize" value="3" />
+		<!-- 设置丢失阀值,当队列中可用数小于阀值时,丢失请求 -->
+		<property name="discardingThreshold" value="0" />
+		<!-- 设置具体处理请求的 appender- ref -->
+		<property name="appenderRef" ref="sqlMonitorDB" />
+	</bean>
+	
+	
+	<!-- 动态获取springContext工具类 -->
+	<bean id="springContextUtil" class="com.coba.core.utils.SpringContextUtil" lazy-init="false"/>
+	<!-- 旧版的hdfs管理器
+	<bean id="HDFSFileManager" class="com.coba.core.file.HDFSFileManager">
+		<constructor-arg index="0" value="config/hdfs/fileconfig.xml" />
+	</bean>-->
+
+	<!-- 预加载bean的声明
+	<bean id="preloadService" lazy-init="false"
+		class="com.coba.core.daoframework.cache.preload.PreloadService">
+	</bean> -->
+	
+	
+	<!-- 缓存配置   注意:redis.properties文件要放在根路径下  -->
+	<bean id="cacheAdminFactory" class="com.coba.core.cacheframework.cache.CacheAdminFactory">
+		<constructor-arg index="1" value="redis.properties" />
+	</bean>
+	<!-- 缓存客户端使用--> 
+	<bean id="cacheClient" factory-bean="cacheAdminFactory" factory-method="getCacheClient"/>
+	
+</beans>

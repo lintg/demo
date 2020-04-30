@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.test</groupId>
+  <artifactId>mydubbo</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>tofuture-local-maven</id>
+			<name>tofuture localmaven</name>
+			<url>http://127.0.0.1:8081/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>central</id>
+			<name>Maven Plugin Repository</name>
+      		<url>http://repo1.maven.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<url>http://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<organization>
+		<name>mego</name>
+		<url>http://www.mego.com</url>
+	</organization>
+
+	<properties>
+		<coba.core.version>1.0.0</coba.core.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<portable.maven.version>1.1.5</portable.maven.version>
+		<mysql.connector.version>5.1.26</mysql.connector.version>
+		<junit.version>4.11</junit.version>
+		<jdk.version>1.7</jdk.version>
+		<mockito.version>1.9.5</mockito.version>
+		<!-- 这边spring 的版本，要与core框架上的spring版本一致 -->
+		<spring.version>5.1.3.RELEASE</spring.version>
+		<shiro.version>1.2.2</shiro.version>
+		<jetty.version>7.6.11.v20130520</jetty.version>
+		<checkstyle.config.location>MEGOStyles.xml</checkstyle.config.location>
+		<checkstyle.version>5.0</checkstyle.version>
+		<oracle.version>12.1.0.1.0</oracle.version>
+		<hessian.version>4.0.7</hessian.version>
+		<org.bouncycastle.version>1.46</org.bouncycastle.version>
+		<servlet.version>2.4</servlet.version>
+		<jackson.version>1.9.9</jackson.version>
+		<commons-codec.version>1.8</commons-codec.version>
+		<mamsws.version>1.1</mamsws.version>
+		<xerces.version>2.11.0</xerces.version>
+		<c3p0.version>0.9.5-pre6</c3p0.version>
+		<ehcache.version>2.6.6</ehcache.version>
+		<jstl.version>1.2</jstl.version>
+		<thumbnailator.version>0.4.6</thumbnailator.version>
+		<kaptcha.version>2.3.2</kaptcha.version>
+		<jmail.version>1.4.7</jmail.version>
+		<itextpdf.version>5.4.4</itextpdf.version>
+		<cxf.version>2.7.7</cxf.version>
+		<jaxb-xjc.version>2.2.7</jaxb-xjc.version>
+		<logback-ext-spring>0.1.1</logback-ext-spring>
+		<xml-apis>1.3.03</xml-apis>
+		<jackson.version>1.9.9</jackson.version>
+		<groovy.version>2.2.1</groovy.version>
+	
+	</properties>
+
+
+	<!-- 依赖预配置 -->
+	<dependencyManagement>
+		<dependencies>
+<!-- core start -->
+			<dependency>
+				<groupId>com.coba</groupId>
+				<artifactId>mego-core</artifactId>
+				<version>${mego.core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.coba</groupId>
+				<artifactId>mego-daoframework</artifactId>
+				<version>${mego.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.coba</groupId>
+				<artifactId>mego-messageframework</artifactId>
+				<version>${mego.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.coba</groupId>
+				<artifactId>mego-web</artifactId>
+				<version>${mego.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.coba</groupId>
+				<artifactId>mego-sessionmanager</artifactId>
+				<version>${mego.core.version}</version>
+			</dependency>
+
+<!-- core end -->
+			
+			<dependency>
+				<groupId>com.caucho</groupId>
+				<artifactId>hessian</artifactId>
+				<version>${hessian.version}</version>
+			</dependency>
+
+			<!-- SECURITY begin -->
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-spring</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-ehcache</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache-core</artifactId>
+				<version>${ehcache.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons-codec.version}</version>
+			</dependency>
+			<!-- SECURITY end -->
+
+			<!-- file upload -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>1.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.4</version>
+			</dependency>
+			<!-- file upload end -->
+
+			<!-- sql monitor 依赖 start -->
+			<dependency>
+				<groupId>org.logback-extensions</groupId>
+				<artifactId>logback-ext-spring</artifactId>
+				<version>${logback-ext-spring}</version>
+			</dependency>
+			<!-- sql monitor 依赖 end -->
+			
+			<!-- xml-apis -->
+			<dependency>
+  				<groupId>xml-apis</groupId>
+				<artifactId>xml-apis</artifactId>
+				<version>${xml-apis}</version>
+			</dependency>
+			
+			<!-- 文件导入导出 -->
+		<dependency>
+		  <groupId>org.apache.poi</groupId>
+		  <artifactId>com.springsource.org.apache.poi</artifactId>
+		  <version>3.9.0.FINAL</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.poi</groupId>
+		  <artifactId>poi-ooxml</artifactId>
+		  <version>3.11</version>
+		</dependency>	
+			
+			<!-- aspose导入导出 -->
+			<dependency>
+				<groupId>com.aspose</groupId>
+				<artifactId>aspose.words</artifactId>
+				<version>14.11</version>
+				<classifier>jdk16</classifier>
+			</dependency>
+			<dependency>
+				<groupId>com.aspose</groupId>
+				<artifactId>aspose.cells</artifactId>
+				<version>7.7.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.aspose</groupId>
+				<artifactId>aspose.pdf</artifactId>
+				<version>4.5.0</version>
+			</dependency>
+			
+			<!-- J2EE7 -->
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>7.0</version>
+			</dependency>
+			
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- parent中仅列出测试类和管理类依赖 -->
+	<dependencies>
+
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[2.0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+											<goal>unpack</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore/>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+
+				<!-- cobertura插件, 设置不需要计算覆盖率的类 -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>cobertura-maven-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<instrumentation>
+							<includes>
+								<include>**/service/*Service.class</include>
+							</includes>
+							<excludes>
+								<exclude>**/service/I*Service.class</exclude>
+							</excludes>
+						</instrumentation>
+						<formats>
+							<format>xml</format>
+						</formats>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>com.juvenxu.portable-config-maven-plugin</groupId>
+					<artifactId>portable-config-maven-plugin</artifactId>
+					<version>${portable.maven.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>replace-package</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>com.google.code.maven-replacer-plugin</groupId>
+					<artifactId>replacer</artifactId>
+					<version>1.5.2</version>
+					<executions>
+						<execution>
+							<phase>prepare-package</phase>
+							<goals>
+								<goal>replace</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<!-- compiler插件, 设定JDK版本 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<showWarnings>true</showWarnings>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- test插件, 仅测试名称为*Test的类,使用支持分组测试的surefire-junit47 driver -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.15</version>
+				<configuration>
+					<includes>
+						<include>**/base/service/*Test.java</include>
+					</includes>
+					<argLine>-Xmx512M</argLine>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>2.15</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<!-- enforcer插件, 设定环境与依赖的规则 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.3.1</version>
+				<executions>
+					<execution>
+						<id>enforce-banned-dependencies</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>3.0.3</version>
+								</requireMavenVersion>
+								<requireJavaVersion>
+									<version>1.6</version>
+								</requireJavaVersion>
+								<bannedDependencies>
+									<searchTransitive>true</searchTransitive>
+									<!-- 避免引入过期的jar包 -->
+									<excludes>
+										<!-- exclude>commons-logging</exclude -->
+										<exclude>aspectj:aspectj*</exclude>
+										<exclude>org.springframework:2.*</exclude>
+										<exclude>org.springframework:3.0.*</exclude>
+									</excludes>
+								</bannedDependencies>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- resource插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+
+			<!-- install插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.4</version>
+			</plugin>
+
+			<!-- clean插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+
+			<!-- dependency插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>all</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>../tofuture-web</module>
+				<module>../tfmanage-web</module>
+			</modules>
+		</profile>
+
+		<!-- 测试环境使用 -->
+		<profile>
+			<id>test</id>
+			<modules>
+				<module>../tofuture-web</module>
+				<module>../tfmanage-web</module>
+			</modules>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.juvenxu.portable-config-maven-plugin</groupId>
+						<artifactId>portable-config-maven-plugin</artifactId>
+						<configuration>
+							<portableConfig>src/main/portable/test.xml</portableConfig>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- UAT环境使用 -->
+		<profile>
+			<id>uat</id>
+			<modules>
+				<module>../tofuture-web</module>
+				<module>../tfmanage-web</module>
+			</modules>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.juvenxu.portable-config-maven-plugin</groupId>
+						<artifactId>portable-config-maven-plugin</artifactId>
+						<configuration>
+							<portableConfig>src/main/portable/uat.xml</portableConfig>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- 生产环境使用 -->
+		<profile>
+			<id>prod</id>
+			<modules>
+				<module>../tofuture-web</module>
+				<module>../tfmanage-web</module>
+			</modules>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.juvenxu.portable-config-maven-plugin</groupId>
+						<artifactId>portable-config-maven-plugin</artifactId>
+						<configuration>
+							<portableConfig>src/main/portable/prod.xml</portableConfig>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+	<modules>
+		<module>mydubbo-api</module>
+		<module>mydubbo-service</module>
+		<module>mydubbo-web</module>
+	    <module>dubbo-new-provider</module>
+	    <module>dubbo-new-consumer</module>
+  	</modules>
+</project>

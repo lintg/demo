@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mydubbo.common.dao.MeAccessLogDao">
+
+	<insert id="insert" parameterType="com.coba.core.monitor.accesslog.domain.MeAccessLog" keyProperty="id">
+		INSERT INTO
+		MONITOR_ACCESSLOG(ID,USER_ID,INTERFACE_NAME,INTERFACE_VERSION,INTERFACE_GROUP,METHOD_INFO,ARGUMENTS,RESULT,EXCEPTION_MSG,CONSUMER_ADDRESS,CONSUMER_APPNAME,PROVIDER_ADDRESS,PROVIDER_APPNAME,START_TIME,END_TIME)
+		VALUES(#{id},#{userId},#{serviceName},#{serviceVersion},#{serviceGroup},#{methodInfo},#{arguments},#{result},#{exceptionMsg},#{consumerAddress},#{consumerAppName},#{providerAddress},#{providerAppName},#{startTime},#{endTime})
+	</insert>
+</mapper>
