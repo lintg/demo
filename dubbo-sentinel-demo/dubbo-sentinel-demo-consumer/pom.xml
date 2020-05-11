@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+  <artifactId>dubbo-sentinel-demo-consumer</artifactId>
+  <name>dubbo-sentinel-demo-consumer</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+   	 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   	 	<java.version>1.8</java.version>
+    	<coba.core.version>1.0.0</coba.core.version>
+        <dubbo.version>2.7.6</dubbo.version>
+        <sentinel.version>1.7.2</sentinel.version>
+        <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
+        <c3p0.version>0.9.5-pre6</c3p0.version>
+		<mysql.connector.version>5.1.26</mysql.connector.version>
+		<logback-ext-spring>0.1.1</logback-ext-spring>
+  </properties>
+  <dependencies>
+		<!-- 依赖模型和服务接口项目 start -->
+		<dependency>
+			<groupId>com.test</groupId>
+			<artifactId>dubbo-sentinel-demo-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+   		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- springboot dubbo starter-->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+
+
+        <!--使用ZK做注册中需要curator 客户端 -->
+        <!-- <dependency>
+           <groupId>org.apache.curator</groupId>
+           <artifactId>curator-recipes</artifactId>
+           <version>4.2.0</version>
+       </dependency>
+       <dependency>
+           <groupId>org.apache.curator</groupId>
+           <artifactId>curator-framework</artifactId>
+           <version>4.2.0</version>
+       </dependency>-->
+
+        <!-- nacos做注册中心-->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-registry-nacos</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.spring</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+
+        <!--sentinel dubbo -->
+
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-apache-dubbo-adapter</artifactId>
+            <version>1.6.3</version>
+        </dependency>
+
+        <!--使用sentinel dashboard导入-->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-transport-simple-http</artifactId>
+            <version>1.6.3</version>
+        </dependency>
+        
+  </dependencies>
+  
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>false</executable>
+                    <finalName>${project.artifactId}-${spring-boot.version}</finalName>
+                    <outputDirectory>${user.dir}/target</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

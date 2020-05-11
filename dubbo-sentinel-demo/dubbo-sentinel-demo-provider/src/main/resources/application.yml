@@ -1,0 +1,31 @@
+
+spring:
+  main:
+    web-application-type: none # 代表此服务不注册为web系统
+  application:
+    name: dubbo-sentinel-demo-provider
+
+dubbo:   
+   application:   
+      name:   ${spring.application.name}
+   server:   true
+   registry:   
+#      address:   zookeeper://127.0.0.1:2181
+      address:   nacos://127.0.0.1:8848
+   config-center:   
+      address:   nacos://127.0.0.1:8848
+      app-name:   ${spring.application.name}
+
+   protocol:   
+      name:   dubbo
+      port:   20881   #如果要启动多个dubbo服务者，要更改这个端口号与server.port端口号
+   provider:   
+      timeout: 3000 #超时时间
+      threads:   10
+      threadpool:   fixed
+      loadbalance:   roundrobin
+   scan:   
+      base-packages:   com.mydubbo
+
+
+

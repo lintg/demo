@@ -486,5 +486,6 @@
 		<module>mydubbo-web</module>
 	    <module>dubbo-new-provider</module>
 	    <module>dubbo-new-consumer</module>
-  	</modules>
+    <module>dubbo-sentinel-demo</module>
+  </modules>
 </project>
