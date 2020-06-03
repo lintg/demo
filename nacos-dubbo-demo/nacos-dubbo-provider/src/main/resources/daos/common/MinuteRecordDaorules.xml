@@ -1,0 +1,7 @@
+<rules>
+	<!-- 新增 -->
+	<rule>
+		<namespace>com.mydubbo.common.dao.MinuteRecordDao</namespace>
+		<shards>partition_log1</shards>
+	</rule>
+</rules>

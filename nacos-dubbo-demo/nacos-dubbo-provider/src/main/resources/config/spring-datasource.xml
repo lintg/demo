@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-lazy-init="true">
+
+	<bean id="dataSources" class="com.coba.core.daoframework.datasources.DefaultMeDataSourceService">
+		<property name="dataSourceDescriptors">
+			<set>
+				<bean
+					class="com.coba.core.daoframework.datasources.MeDataSourceDescriptor">
+					<property name="identity" value="partition1_main" />
+					<property name="targetDataSource" ref="partition1_main" />
+				</bean>
+ 				<bean
+					class="com.coba.core.daoframework.datasources.MeDataSourceDescriptor">
+					<property name="identity" value="partition_log1" />
+					<property name="targetDataSource" ref="partition_log1" />
+				</bean>				
+				<bean
+					class="com.coba.core.daoframework.datasources.MeDataSourceDescriptor">
+					<property name="identity" value="partition_log2" />
+					<property name="targetDataSource" ref="partition_log2" />
+				</bean>	
+			</set>
+		</property>
+	</bean>
+	
+	<bean id="partition1_main" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://db-server:3306/mydubbo?useUnicode=true&amp;characterEncoding=utf8" />
+		<property name="user" value="root"/>
+        <property name="password" value="root"/>		
+		<property name="minPoolSize" value="2" />
+		<property name="maxPoolSize" value="20" />
+		<property name="maxIdleTime" value="1800" />
+		<property name="acquireIncrement" value="2" />
+		<property name="maxStatements" value="0" />
+		<property name="initialPoolSize" value="2" />
+		<property name="idleConnectionTestPeriod" value="1800" />
+		<property name="acquireRetryAttempts" value="30" />
+		<property name="preferredTestQuery" value="select 1" />
+		<property name="breakAfterAcquireFailure" value="false" />
+		<property name="testConnectionOnCheckout" value="true" />
+		<property name="numHelperThreads" value="3" />
+	</bean>
+
+ 	<bean id="partition_log1" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://db-server:3306/hycloud_log?useUnicode=true&amp;characterEncoding=utf8" />
+		<!-- <property name="properties" ref="partition_log_password"/> -->
+		<property name="user" value="root"/>
+        <property name="password" value="root"/>			
+		<property name="minPoolSize" value="2" />
+		<property name="maxPoolSize" value="20" />
+		<property name="maxIdleTime" value="1800" />
+		<property name="acquireIncrement" value="2" />
+		<property name="maxStatements" value="0" />
+		<property name="initialPoolSize" value="2" />
+		<property name="idleConnectionTestPeriod" value="1800" />
+		<property name="acquireRetryAttempts" value="30" />
+		<property name="preferredTestQuery" value="select 1" />
+		<property name="breakAfterAcquireFailure" value="false" />
+		<property name="testConnectionOnCheckout" value="true" />
+		<property name="numHelperThreads" value="3" />
+	</bean>
+
+	<bean id="partition_log2" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://db-server:3306/hycloud_log2?useUnicode=true&amp;characterEncoding=utf8" />
+		<property name="user" value="root"/>
+        <property name="password" value="root"/>			
+		<property name="minPoolSize" value="2" />
+		<property name="maxPoolSize" value="20" />
+		<property name="maxIdleTime" value="1800" />
+		<property name="acquireIncrement" value="2" />
+		<property name="maxStatements" value="0" />
+		<property name="initialPoolSize" value="2" />
+		<property name="idleConnectionTestPeriod" value="1800" />
+		<property name="acquireRetryAttempts" value="30" />
+		<property name="preferredTestQuery" value="select 1" />
+		<property name="breakAfterAcquireFailure" value="false" />
+		<property name="testConnectionOnCheckout" value="true" />
+		<property name="numHelperThreads" value="3" />
+	</bean> 
+
+</beans>

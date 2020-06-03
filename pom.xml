@@ -487,5 +487,7 @@
 	    <module>dubbo-new-provider</module>
 	    <module>dubbo-new-consumer</module>
     <module>dubbo-sentinel-demo</module>
+    <module>nacos-dubbo</module>
+    <module>nacos-dubbo-demo</module>
   </modules>
 </project>

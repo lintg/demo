@@ -1,0 +1,55 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: nacos-dubbo-provider
+dubbo:
+  registry:
+    address: nacos://127.0.0.1:8848 #注册地址
+  application:
+    name: nacos-dubbo-provider #应用名
+  protocol:
+    name: dubbo #dubbo协议
+    port: 20880 #协议端口
+  scan:
+    base-packages: com.mydubbo #扫包范围
+  provider:
+    timeout: 30000 #超时时间
+service:
+  version: 1.0.0 #自定义的版本
+  
+  
+#redis配置       
+redis:  
+  enable: true
+  group:  mclient0
+  #redis类型（simpleJedis:单个redi模式,redisSentinel:哨兵模式,jedisCluster:服务端集群模式） 
+  jedisType: simpleJedis
+  #redisSentinel填写主节点名
+#  masterName: sentinel-192.168.60.168-6379
+#  #Redis为单线程命令处理机制,多数据库功能不建议在生产环境使用
+#  #redis DB索引,不设置默认为0,默认值范围(0-15)---注意：不同的业务系统，如果共用一个redis时，dbIndex不能相同，否则数据会被覆盖
+  dbIndex:  0
+  #密码，为空时为没有密码
+  password: 
+  poolConfig: 
+    maxTotal: 2048
+    maxIdle: 10
+    minIdle: 3
+    maxWaitMillis: 5000
+    testOnBorrow: true
+    testOnReturn: false
+  #注：simpleJedis:填写一个节点;redisSentinel:填写Sentinel节点;jedisCluster:填写主从节点
+  nodeList:  
+    #单机开发
+    - host: 127.0.0.1
+      port: 6379
+      
+#SQL监控 配置
+sql-monitor-param:   
+   enable:   true
+   queueSize:   512  #设置队列大小 , 默认值为 256
+   threadSize:   3  #处理队列的线程池大小,默认值为 2 
+   discardingThreshold:   0  #设置丢失阀值,当队列中可用数小于阀值时,丢失请求
+   
+      

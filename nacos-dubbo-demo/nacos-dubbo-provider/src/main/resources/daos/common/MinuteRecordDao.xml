@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mydubbo.common.dao.MinuteRecordDao">
+	<insert id="insertRecord" parameterType="com.coba.core.monitor.statistic.domain.MonitorRecord">
+		INSERT INTO
+		MONITOR_MINUTE(ID,TIME,PROVIDER_IP,CONSUMER_IP,PVCS_SIDE,
+		METHOD_NAME,INTERFACE_NAME,APPLICATION_NAME,TIMESTAMP,SUCCESS,FAILURE,ELAPSE,CONCURRENT,MAX_ELAPSED,MAX_CONCURRENT)
+		VALUES(#{id},#{time},#{providerIP},#{consumerIP},#{side},#{methodName},#{interfaceName},#{applicationName},#{timestamp},#{success},#{failure},#{elapsed},#{concurrent},#{maxElapsed},#{maxConcurrent})
+	</insert>
+
+
+	<insert id="insertRecords" parameterType="java.util.List">
+		INSERT INTO
+		MONITOR_MINUTE(ID,TIME,PROVIDER_IP,CONSUMER_IP,PVCS_SIDE,
+		METHOD_NAME,INTERFACE_NAME,APPLICATION_NAME,TIMESTAMP,SUCCESS,FAILURE,ELAPSE,CONCURRENT,MAX_ELAPSED,MAX_CONCURRENT)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.id},#{item.time},#{item.providerIP},#{item.consumerIP},#{item.side},#{item.methodName},#{item.interfaceName},#{item.applicationName},#{item.timestamp},#{item.success},#{item.failure},#{item.elapsed},#{item.concurrent},#{item.maxElapsed},#{item.maxConcurrent})
+		</foreach>
+	</insert>
+
+</mapper>
