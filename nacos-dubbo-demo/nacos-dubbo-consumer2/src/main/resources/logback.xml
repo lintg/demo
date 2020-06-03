@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- 控制台输出 -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder charset="UTF-8">
+			<pattern>%date [%-5level] [%thread] %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 时间滚动输出 文件日志 -->
+	<appender name="file—stdout" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">   
+			<level>DEBUG</level>   
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>logs/stdout.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<MaxHistory>10</MaxHistory>
+		</rollingPolicy>
+		<encoder charset="UTF-8">
+			<pattern>%date [%-5level] [%thread] %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 时间滚动输出 level为 ERROR 日志 -->
+	<appender name="file—error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>logs/error.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<MaxHistory>10</MaxHistory>
+		</rollingPolicy>
+		<encoder charset="UTF-8">
+			<pattern>%date [%-5level] [%thread] %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 应用代码DUBBO访问日志控制 -->
+	<logger name="service.accesslog" level="DEBUG" />
+	<!-- zookeeper日志控制 -->
+	<logger name="org.apache.zookeeper" level="INFO" />
+	<logger name="org.I0Itec.zkclient" level="INFO" />
+	<!-- Dubbo日志控制 -->
+	<logger name="com.alibaba.dubbo" level="INFO" />
+	<!-- 校验日志控制 -->
+	<logger name="org.hibernate.validator" level="INFO" />
+	<!-- Spring日志控制 -->
+	<logger name="org.springframework.core" level="INFO" />
+	<logger name="org.springframework.beans.factory" level="INFO" />
+	<logger name="org.springframework.context" level="INFO" />
+	<logger name="org.springframework.aop" level="INFO" />
+	<logger name="org.springframework.jdbc" level="INFO" />
+	<logger name="org.springframework.transaction.annotation" level="INFO" />
+	<!-- MyBatis日志控制 -->
+	<logger name="org.mybatis.spring" level="DEBUG" />
+	<logger name="org.apache.ibatis" level="DEBUG" />
+	<logger name="org.apache.activemq" level="INFO" />
+	<!-- Java基础类日志控制 -->
+	<logger name="java.sql.Connection" level="DEBUG" />
+	<logger name="java.sql.Statement" level="DEBUG" />
+	<!-- 应用代码日志控制 ** -->
+	<logger name="com.mydubbo" level="INFO" />
+	
+	<logger name="org.quartz" level="INFO" />
+	<logger name="com.mchange" level="INFO" />
+	<logger name="com.coba.core.monitor.accesslog.filter.MeAccessLogFilter" level="INFO" />
+	
+	<logger name="com.coba.core.daoframework" level="INFO" />
+	<logger name="com.mydubbo.common.dao.SqlMonitorLogDao" level="INFO" />
+	<logger name="com.mydubbo.common.dao.MeAccessLogDao" level="INFO" />
+	<logger name="com.mydubbo.common.dao.MinuteRecordDao" level="INFO" />	
+	<!-- sql 语句监控   start-->
+		<!-- 设置 Appender , 该Appender是 logback与spring的一个桥接类,最终日志请求会交给 spring容器中 bean id 为 "sqlMonitor" 的类处理,
+		该bean 	第一步中已经声明,注意两边的 name 值要一致 -->
+	<appender name="sqlMonitor" class ="ch.qos.logback.ext.spring.DelegatingLogbackAppender"/>
+		<!-- com.mydubbo要改成实际项目的根 包名 -->
+	<logger name="MONITOR_SQL.com.mydubbo" level="DEBUG" additivity="false">
+		<!-- 将 log 请求交给 appender 处理 -->
+		<appender-ref ref= "sqlMonitor" />
+	</logger>
+		<!-- 排除 sql 语句监控的Dao-->
+	<logger name="MONITOR_SQL.com.mydubbo.common.dao.MeAccessLogDao" level="OFF" />
+	<logger name="MONITOR_SQL.com.mydubbo.common.dao.MinuteRecordDao" level="OFF" />	
+	<logger name="MONITOR_SQL.com.mydubbo.common.dao.SqlMonitorLogDao" level="OFF" />	
+	<!-- sql 语句监控 end -->
+	
+	<root level="DEBUG">
+		<appender-ref ref="stdout" />
+		<appender-ref ref="file—stdout" />
+		<appender-ref ref="file—error" />
+	</root>
+</configuration>
