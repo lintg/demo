@@ -38,7 +38,7 @@
 	
 	<bean id="partition1_main" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://db-server:3306/mydubbo?useUnicode=true&amp;characterEncoding=utf8" />
+		<property name="jdbcUrl" value="jdbc:mysql://db-server:3306/mydubbo?characterEncoding=utf-8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;useSSL=true" />
 		<property name="user" value="root"/>
         <property name="password" value="root"/>		
 		<property name="minPoolSize" value="2" />
@@ -57,7 +57,7 @@
 
  	<bean id="partition_log1" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://db-server:3306/hycloud_log?useUnicode=true&amp;characterEncoding=utf8" />
+		<property name="jdbcUrl" value="jdbc:mysql://db-server:3306/hycloud_log?characterEncoding=utf-8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;useSSL=true" />
 		<!-- <property name="properties" ref="partition_log_password"/> -->
 		<property name="user" value="root"/>
         <property name="password" value="root"/>			
@@ -77,7 +77,7 @@
 
 	<bean id="partition_log2" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://db-server:3306/hycloud_log2?useUnicode=true&amp;characterEncoding=utf8" />
+		<property name="jdbcUrl" value="jdbc:mysql://db-server:3306/hycloud_log2?characterEncoding=utf-8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;useSSL=true" />
 		<property name="user" value="root"/>
         <property name="password" value="root"/>			
 		<property name="minPoolSize" value="2" />
