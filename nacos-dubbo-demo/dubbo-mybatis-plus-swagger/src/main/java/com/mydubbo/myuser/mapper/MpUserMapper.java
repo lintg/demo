@@ -28,7 +28,12 @@ public interface MpUserMapper extends BaseMapper<MpUser> {
      * @return
      */
     IPage<MpUser> selectMyPage(IPage<MpUser> page, @Param(Constants.WRAPPER) Wrapper<MpUser> queryWrapper);
-    
+    /**
+     * 分页例子
+     * @param page
+     * @param params
+     * @return
+     */
     IPage<MpUser> selectSqlPage(IPage<MpUser> page,@Param("query")  Map<String,Object> params);
 
 }
