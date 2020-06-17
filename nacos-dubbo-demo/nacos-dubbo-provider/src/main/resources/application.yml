@@ -45,7 +45,7 @@ redis:
     - host: 127.0.0.1
       port: 6379
       
-#SQL监控 配置
+#SQL监控 配置            1、pom.xml加入包logback-ext-spring，2、logback.xml文件修改<logger name="MONITOR_SQL.com.blbl" level="DEBUG" additivity="false"> 这边的包名前缀  3、添加SqlMonitorConfig类
 sql-monitor-param:   
    enable:   true
    queueSize:   512  #设置队列大小 , 默认值为 256
