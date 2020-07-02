@@ -20,7 +20,7 @@
         <dubbo.version>2.7.6</dubbo.version>
         <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
         <c3p0.version>0.9.5-pre6</c3p0.version>
-		<mysql.connector.version>5.1.26</mysql.connector.version>
+		<mysql.connector.version>8.0.16</mysql.connector.version>
 		<logback-ext-spring>0.1.1</logback-ext-spring>
   </properties>
   
